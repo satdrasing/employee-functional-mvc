@@ -1,11 +1,10 @@
 package com.example.employee.repos;
 
-import java.math.BigInteger;
-
+import com.example.employee.model.Employee;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.employee.model.Employee;
+import java.math.BigInteger;
 
 @Repository
 public interface EmployeeRepository  extends MongoRepository<Employee, BigInteger>{

@@ -1,25 +1,26 @@
 package com.example.employee.handlers;
 
-import static org.springframework.web.servlet.function.RequestPredicates.GET;
-import static org.springframework.web.servlet.function.RequestPredicates.path;
-import static org.springframework.web.servlet.function.RouterFunctions.nest;
-import static org.springframework.web.servlet.function.RouterFunctions.route;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.ServerResponse;
 
+import static org.springframework.web.servlet.function.RequestPredicates.GET;
+import static org.springframework.web.servlet.function.RequestPredicates.path;
+import static org.springframework.web.servlet.function.RouterFunctions.nest;
+import static org.springframework.web.servlet.function.RouterFunctions.route;
+
 @Configuration
 public class EmployeeHandlerRoutes {
 
-	@Bean
-	public RouterFunction<ServerResponse> employeeRoutes(EmployeeHandlers employeeHandlers) {
-		
-		return nest(path("/api"),
-						nest(path("/employee"),
-									route(GET("/all"), employeeHandlers::getAllEmployees))
-						.andNest(path("/student"), 
-									route(GET("/all"), employeeHandlers::getAllStudent)));
-	}
+    @Bean
+    public RouterFunction<ServerResponse> employeeRoutes(EmployeeHandlers employeeHandlers) {
+
+        return nest(
+                path("/api"), nest(
+                        path("/employee"),
+                                route(GET("/all"), employeeHandlers::getAllEmployees))
+                        .andNest(path("/student"),
+                                route(GET("/all"), employeeHandlers::getAllStudent)));
+    }
 }
