@@ -8,16 +8,19 @@ import com.example.employee.repos.EmployeeRepository;
 import com.example.employee.repos.StudentRepository;
 import com.example.employee.repos.SubjectRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import java.util.List;
 import java.util.stream.Stream;
 
 @Configuration
 @RequiredArgsConstructor
-public class DataInitalizer {
+@Slf4j
+public class DataInitializer {
 
     private final EmployeeRepository employeeRepository;
 
@@ -26,12 +29,14 @@ public class DataInitalizer {
     private final StudentRepository studentRepository;
 
     @Bean
+    @Profile("default")
     public CommandLineRunner init() {
+        log.info("DB initialisation ");
         return args -> {
             employeeRepository.deleteAll();
             subjectRepository.deleteAll();
             studentRepository.deleteAll();
-			
+
 
             Stream
                     .of(
