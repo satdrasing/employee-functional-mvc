@@ -30,6 +30,8 @@ public class DataInitializer {
     private final StudentRepository studentRepository;
 
     private final ImageRepository imageRepository;
+
+
     @Bean
     @Profile("default")
     public CommandLineRunner init() {

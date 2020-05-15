@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigInteger;
 
-//@Data
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -21,20 +21,5 @@ public class ImageFile {
     private BigInteger id;
 
     private Binary image;
-
-    public BigInteger getId() {
-        return id;
-    }
-
-    public void setId(BigInteger id) {
-        this.id = id;
-    }
-
-    public Binary getImage() {
-        return image;
-    }
-
-    public void setImage(Binary image) {
-        this.image = image;
-    }
+    
 }

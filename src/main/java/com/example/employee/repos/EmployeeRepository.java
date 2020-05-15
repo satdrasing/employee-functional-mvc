@@ -8,5 +8,4 @@ import java.math.BigInteger;
 
 @Repository
 public interface EmployeeRepository  extends MongoRepository<Employee, BigInteger>{
-
 }
