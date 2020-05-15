@@ -2,9 +2,11 @@ package com.example.employee.handlers;
 
 import com.example.employee.model.ImageFile;
 import com.example.employee.repos.ImageRepository;
+import com.example.employee.utils.CommonUtils;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.Binary;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.function.ServerResponse;
@@ -28,12 +30,7 @@ public class UploaderHandler {
 
     public ServerResponse postImage(ServerRequest request) throws ServletException, IOException {
 
-        var multipartHttpServletRequest = (MultipartHttpServletRequest) request.servletRequest();
-        var multipartFile = multipartHttpServletRequest.getFile("file");
-
-        if(!multipartFile.getContentType().equals(APPLICATION_PDF_VALUE)){
-            return noContent().build();
-        }
+        MultipartFile multipartFile = CommonUtils.getMultipartFile(request);
 
         ImageFile _imageFile = ImageFile.builder()
                 .image(new Binary(multipartFile.getBytes()))
