@@ -28,7 +28,8 @@ public class EmployeeHandlerRoutes {
                         .andNest(path("/student"),
                                 route(GET("/all"), employeeHandlers::getAllStudent))
                         .andNest(path("/uploader"),
-                                route(POST("/image").and(accept(MediaType.MULTIPART_FORM_DATA)),uploaderHandler::postImage))
+                                route(POST("/image"),uploaderHandler::postImage)
+                                        .andRoute(GET("/image/{id}"), uploaderHandler::getImage))
                 );
     }
 }

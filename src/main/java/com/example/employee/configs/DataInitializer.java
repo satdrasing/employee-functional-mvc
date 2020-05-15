@@ -5,6 +5,7 @@ import com.example.employee.model.Employee;
 import com.example.employee.model.Student;
 import com.example.employee.model.Subject;
 import com.example.employee.repos.EmployeeRepository;
+import com.example.employee.repos.ImageRepository;
 import com.example.employee.repos.StudentRepository;
 import com.example.employee.repos.SubjectRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +29,7 @@ public class DataInitializer {
 
     private final StudentRepository studentRepository;
 
+    private final ImageRepository imageRepository;
     @Bean
     @Profile("default")
     public CommandLineRunner init() {
@@ -36,6 +38,7 @@ public class DataInitializer {
             employeeRepository.deleteAll();
             subjectRepository.deleteAll();
             studentRepository.deleteAll();
+            imageRepository.deleteAll();
 
 
             Stream
