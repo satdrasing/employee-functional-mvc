@@ -1,6 +1,5 @@
 package com.example.employee.handlers;
 
-import com.example.employee.utils.CommonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +10,7 @@ import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.function.ServerResponse;
 
+import static com.example.employee.utils.CommonConst.FILE;
 import static org.springframework.http.MediaType.APPLICATION_PDF_VALUE;
 import static org.springframework.web.servlet.function.RequestPredicates.GET;
 import static org.springframework.web.servlet.function.RequestPredicates.POST;
@@ -41,14 +41,19 @@ public class EmployeeHandlerRoutes {
 
     public HandlerFilterFunction<ServerResponse, ServerResponse> mediaTypeFilter() {
         return (request, next) -> {
-            MultipartFile multipartFile = CommonUtils.getMultipartFile(request);
+            MultipartFile multipartFile = getMultipartFile(request);
 
             if (!multipartFile.getContentType().equals(APPLICATION_PDF_VALUE)) {
                 return noContent().build();
             }
+            request.servletRequest().setAttribute(FILE, multipartFile);
             return next.handle(request);
         };
     }
 
+    private   MultipartFile getMultipartFile(ServerRequest request) {
+        var multipartHttpServletRequest = (MultipartHttpServletRequest) request.servletRequest();
+        return multipartHttpServletRequest.getFile(FILE);
+    }
 
 }
