@@ -26,7 +26,7 @@ public class UploaderHandler {
 
     final private ImageRepository imageRepository;
 
-    public ServerResponse postImage(ServerRequest request) throws ServletException, IOException {
+    public ServerResponse postImage(ServerRequest request) throws IOException {
 
         MultipartFile multipartFile = (MultipartFile) request.servletRequest().getAttribute(FILE);
 
