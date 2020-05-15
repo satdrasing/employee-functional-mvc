@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.function.ServerResponse;
 
-import javax.servlet.ServletException;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URI;
