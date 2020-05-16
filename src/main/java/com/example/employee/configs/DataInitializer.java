@@ -2,6 +2,7 @@ package com.example.employee.configs;
 
 import com.example.employee.model.Department;
 import com.example.employee.model.Employee;
+import com.example.employee.model.ImageFile;
 import com.example.employee.model.Student;
 import com.example.employee.model.Subject;
 import com.example.employee.repos.EmployeeRepository;
@@ -10,11 +11,15 @@ import com.example.employee.repos.StudentRepository;
 import com.example.employee.repos.SubjectRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.bson.types.Binary;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.io.ClassPathResource;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -90,6 +95,10 @@ public class DataInitializer {
                                     .build())
                     .forEach(studentRepository::save);
 
+
+
         };
+
+
     }
 }

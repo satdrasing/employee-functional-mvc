@@ -23,6 +23,4 @@ public class ImageFile {
 
     private Binary image;
 
-    private MediaType mediaType;
-
 }

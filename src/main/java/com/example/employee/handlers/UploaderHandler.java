@@ -33,7 +33,7 @@ public class UploaderHandler {
                 .image(new Binary(multipartFile.getBytes()))
                 .build();
 
-        imageRepository.save(_imageFile);
+            imageRepository.save(_imageFile);
 
         return created(URI.create("/api/uploader/image/" + _imageFile.getId())).build();
     }

@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.File;
@@ -16,9 +17,12 @@ import java.math.BigInteger;
 import java.nio.file.Files;
 import java.util.Optional;
 
+import static com.example.employee.utils.CommonConst.FILE;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.MediaType.APPLICATION_PDF;
+import static org.springframework.http.MediaType.APPLICATION_PDF_VALUE;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,11 +50,27 @@ public class FileUploaderTest {
 
         mvc
                 .perform(
-                    get("/api/uploader/image/1")
+                        get("/api/uploader/image/1")
                 )
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_PDF))
                 .andExpect(content().bytes(bytes));
+    }
+
+    @Test
+    public void postImage_should_ok() throws Exception {
+
+        File file = new ClassPathResource("file-sample.pdf").getFile();
+
+        var mockMultipartFile = new MockMultipartFile(FILE,
+                file.getName(),
+                APPLICATION_PDF_VALUE,
+                Files.readAllBytes(file.toPath()));
+
+        mvc.perform(multipart("/api/uploader/image")
+                .file(mockMultipartFile))
+                .andExpect(status().isCreated());
+
     }
 
 }

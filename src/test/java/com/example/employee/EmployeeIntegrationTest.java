@@ -1,6 +1,7 @@
 package com.example.employee;
 
 import com.example.employee.model.Employee;
+import com.example.employee.model.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,4 +27,10 @@ public class EmployeeIntegrationTest {
         assertEquals(emp[0].getDept().get(0).getDepartmentName(), "oracle");
     }
 
+    @Test
+    public  void getAllStudent_should_OK(){
+        Student[] student = restTemplate.getForObject("http://localhost:" + port + "/api/student/all", Student[].class);
+        assertEquals(student[0].getStudentName(),"Rajan");
+        assertEquals(student[0].getSubject().getSubjectName(),"Mathematics");
+    }
 }
