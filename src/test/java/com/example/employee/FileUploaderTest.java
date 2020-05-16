@@ -30,7 +30,6 @@ public class FileUploaderTest {
     @Autowired
     private MockMvc mvc;
 
-
     @MockBean
     private ImageRepository imageRepository;
 
@@ -42,11 +41,14 @@ public class FileUploaderTest {
 
         ImageFile imageFile = ImageFile.builder().image(new Binary(bytes)).build();
 
-        when(imageRepository.findById(new BigInteger("1"))).thenReturn(Optional.ofNullable(imageFile));
+        when(imageRepository.findById(new BigInteger("1")))
+                .thenReturn(Optional.ofNullable(imageFile));
 
-        mvc.perform(
-                get("/api/uploader/image/1")
-        ).andExpect(status().isOk())
+        mvc
+                .perform(
+                    get("/api/uploader/image/1")
+                )
+                .andExpect(status().isOk())
                 .andExpect(content().contentType(APPLICATION_PDF))
                 .andExpect(content().bytes(bytes));
     }
