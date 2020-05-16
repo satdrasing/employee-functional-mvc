@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+import static com.example.employee.utils.CommonConst.FILE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -56,7 +57,7 @@ public class FileUploaderIntegrationTest {
         HttpHeaders headers = new HttpHeaders();
 
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("file", classPathResource);
+        body.add(FILE, classPathResource);
 
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
